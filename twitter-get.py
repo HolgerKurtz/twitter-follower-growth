@@ -20,4 +20,14 @@ api = tweepy.API(
     wait_on_rate_limit_notify=True
     )
 #api.update_status("Kleiner API Test")
-followers = api.followers()
+
+def get_followers():
+    screen_name = "kulturdata"
+    followers = tweepy.Cursor(api.followers, screen_name) 
+    _dict = {}
+    for follower in followers.items(10): 
+        _dict[follower.screen_name] = int(follower.followers_count)
+    print("Anzahl", len(_dict))
+    print(_dict)
+
+
