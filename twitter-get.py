@@ -1,5 +1,6 @@
 import tweepy
 import json
+import pandas as pd 
 
 twitter_credential_path = 'creds.json'
 with open(twitter_credential_path, "r") as json_file:
@@ -27,7 +28,9 @@ def get_followers():
     _dict = {}
     for follower in followers.items(10): 
         _dict[follower.screen_name] = int(follower.followers_count)
-    print("Anzahl", len(_dict))
-    print(_dict)
+    return _dict
 
+def save_as_csv():
+    db = pd.read_csv("db.csv").to_dict()
+    db.update(_dict)
 
