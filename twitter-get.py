@@ -33,6 +33,7 @@ def get_followers():
     follower_list = []
 
     for follower in followers.items(2): 
+        print(follower)
         date_list.append(datetime.datetime.today().strftime("%Y-%m-%d"))
         user_list.append(follower.screen_name)
         follower_list.append(int(follower.followers_count))
@@ -41,15 +42,15 @@ def get_followers():
     _dict['date'] = date_list
     _dict['user'] = user_list
     _dict['follower'] = follower_list
-    return _dict
+
+    # Dict --> DataFrame
+    data = pd.DataFrame.from_dict(_dict)
+
+    # DataFrame --> CSV File
+    data.to_csv('db.csv', mode='a', header=False)
 
 
-
-def save_as_csv():
-    db = pd.read_csv("db.csv").to_dict()
-    db.update(get_followers())
 
 
 if __name__ == "__main__":
     get_followers()
-    save_as_csv()
