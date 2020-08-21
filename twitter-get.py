@@ -33,7 +33,6 @@ def get_followers():
     follower_list = []
 
     for follower in followers.items(2): 
-        print(follower)
         date_list.append(datetime.datetime.today().strftime("%Y-%m-%d"))
         user_list.append(follower.screen_name)
         follower_list.append(int(follower.followers_count))
@@ -45,12 +44,18 @@ def get_followers():
 
     # Dict --> DataFrame
     data = pd.DataFrame.from_dict(_dict)
+    print ("vor abspeichern:\n", data)
 
     # DataFrame --> CSV File
-    data.to_csv('db.csv', mode='a', header=False)
+    data.to_csv('db.csv', mode='a', header=False, index=False)
 
 
-
+def calculate_growth():
+    data = pd.read_csv('db.csv')
+    print ("===aus csv===\n", data)
+    date_group_by = data.groupby(data['date']).sum()
+    print("===grouped\n===", date_group_by)
 
 if __name__ == "__main__":
     get_followers()
+    calculate_growth()
