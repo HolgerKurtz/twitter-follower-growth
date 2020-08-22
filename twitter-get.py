@@ -21,7 +21,6 @@ api = tweepy.API(
     wait_on_rate_limit=True, 
     wait_on_rate_limit_notify=True
     )
-#api.update_status("Kleiner API Test")
 
 def get_followers():
     screen_name = "kulturdata"
@@ -88,10 +87,10 @@ def tweet():
     Platz 3: @{top_user[2]} + {top_growth[2]} Follower
     Gratulation! 🎊
     '''
-    print (text, "Zeichenanzahl:", len(text))
+    print (text, "\nZeichenanzahl:", len(text), flush=True))
     #api.update_status(text)
 
 if __name__ == "__main__":
-    # get_followers()
+    get_followers()
     calculate_growth()
     tweet()
