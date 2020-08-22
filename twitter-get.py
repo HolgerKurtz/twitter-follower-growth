@@ -76,37 +76,32 @@ def calculate_growth():
     recent_followers, second_recent_followers = get_2_most_recent_data()
 
     new_dict = {}
-    user_list = []
-    growth_list = []
     for user in recent_followers['user']:
         follower_count = recent_followers.loc[recent_followers['user'] == user].iloc[0]['follower']
 
         follower_count_2 = second_recent_followers.loc[second_recent_followers['user'] == user].iloc[0]['follower']
         diff = follower_count - follower_count_2
 
-        user_list.append(str(user))
-        growth_list.append(str(diff))
-
-
-        new_dict['user'] = user_list
-        new_dict['growth'] = growth_list
+        new_dict[user] = diff
     return new_dict
 
 def tweet():
     new_dict = calculate_growth()
-    ordered_dict = {k: v for k, v in sorted(new_dict.items(), key=lambda item: item[1])}
-    print (ordered_dict)
-    top3_user = ordered_dict['user'][0:2]
-    top3_growth = ordered_dict['growth'][0:2]
+    ordered_dict = {k: v for k, v in sorted(new_dict.items(), key=lambda item: item[1], reverse=True)}
+    # print ("===ordered_List===\n", ordered_dict)
+    top_user = list(ordered_dict.keys())
+    top_growth = list(ordered_dict.values())
 
-    print (top3_user,top3_growth )
+    # print ("top user\n", top_user,"\n Top growth", top_growth )
+ 
     text = f'''
-    Die Top3 meiner Follower mit dem größten Wachstum:
-    Platz 1: @{top3_user[0]} + {top3_growth[0]} Follower 
-    Platz 2: @{top3_user[1]} + {top3_growth[1]} Follower
-    Platz 3: @{top3_user[2]} + {top3_growth[2]} Follower
-    Gratulation! 
+    Top3 meiner Follower mit größtem Wachstum 🚀 (7 Tage):
+    Platz 1: @{top_user[0]} + {top_growth[0]} Follower 
+    Platz 2: @{top_user[1]} + {top_growth[1]} Follower
+    Platz 3: @{top_user[2]} + {top_growth[2]} Follower
+    Gratulation! 🎊
     '''
+
 
     print (text, "Zeichenanzahl:", len(text))
 
