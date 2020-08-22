@@ -87,7 +87,7 @@ def tweet():
     Platz 3: @{top_user[2]} + {top_growth[2]} Follower
     Gratulation! 🎊
     '''
-    print (text, "\nZeichenanzahl:", len(text), flush=True))
+    print (text, "\nZeichenanzahl:", len(text), flush=True)
     #api.update_status(text)
 
 if __name__ == "__main__":
