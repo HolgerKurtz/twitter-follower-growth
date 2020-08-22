@@ -8,6 +8,7 @@ creds.json
 plan.txt
 test.py
 db.csv
+weekly_cron.py
 
 # VSCode
 .vscode
