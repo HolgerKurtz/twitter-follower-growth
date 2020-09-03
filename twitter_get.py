@@ -67,11 +67,13 @@ def calculate_growth():
 
     new_dict = {}
     for user in recent_followers['user']:
-        follower_count = recent_followers.loc[recent_followers['user'] == user].iloc[0]['follower']
-        
-        follower_count_2 = second_recent_followers.loc[second_recent_followers['user'] == user].iloc[0]['follower']
-        diff = follower_count - follower_count_2
-        new_dict[user] = diff
+        try:
+            follower_count = recent_followers.loc[recent_followers['user'] == user].iloc[0]['follower']
+            follower_count_2 = second_recent_followers.loc[second_recent_followers['user'] == user].iloc[0]['follower']
+            diff = follower_count - follower_count_2
+            new_dict[user] = diff
+        except:
+            pass
     return new_dict
 
 def tweet():
