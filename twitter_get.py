@@ -31,7 +31,7 @@ def get_followers():
     user_list = []
     follower_list = []
 
-    for follower in followers.items(20): 
+    for follower in followers.items(): 
         date_list.append(datetime.datetime.today().strftime("%Y-%m-%d"))
         user_list.append(follower.screen_name)
         follower_list.append(int(follower.followers_count))
@@ -90,7 +90,7 @@ def tweet():
     Gratulation! 🎊
     '''
     print (text, "\nZeichenanzahl:", len(text), flush=True)
-    #api.update_status(text)
+    api.update_status(text)
 
 if __name__ == "__main__":
     get_followers()

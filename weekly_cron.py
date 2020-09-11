@@ -5,7 +5,7 @@ weekday = today.weekday()
 
 print ("Weekday:", weekday, flush=True)
 
-if weekday == 1: # if sunday
+if weekday == 0: # if sunday
     import twitter_get
 
     twitter_get.get_followers()
