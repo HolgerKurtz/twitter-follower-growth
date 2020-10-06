@@ -71,7 +71,9 @@ def calculate_growth():
             follower_count = recent_followers.loc[recent_followers['user'] == user].iloc[0]['follower']
             follower_count_2 = second_recent_followers.loc[second_recent_followers['user'] == user].iloc[0]['follower']
             diff = follower_count - follower_count_2
-            new_dict[user] = diff
+
+            if diff > 0 and follower_count > 0: # make sure there is no division / 0  and no negative numbers
+                new_dict[user] = round((diff/follower_count) * 100, 2) # absolute values always prefer th big accounts
         except:
             pass
     return new_dict
@@ -80,19 +82,18 @@ def tweet():
     new_dict = calculate_growth()
     ordered_dict = {k: v for k, v in sorted(new_dict.items(), key=lambda item: item[1], reverse=True)} #not mine but works fine
     top_user = list(ordered_dict.keys())
-    top_growth = list(ordered_dict.values())
- 
+    top_growth = list(ordered_dict.values()) 
     text = f'''
     Top3 meiner Follower mit größtem Wachstum 🚀 (7 Tage):
-    Platz 1: @{top_user[0]} + {top_growth[0]} Follower 
-    Platz 2: @{top_user[1]} + {top_growth[1]} Follower
-    Platz 3: @{top_user[2]} + {top_growth[2]} Follower
+    Platz 1: @{top_user[0]} + {top_growth[0]}% 
+    Platz 2: @{top_user[1]} + {top_growth[1]}%
+    Platz 3: @{top_user[2]} + {top_growth[2]}%
     Gratulation! 🎊
     '''
     print (text, "\nZeichenanzahl:", len(text), flush=True)
-    api.update_status(text)
+    # api.update_status(text)
 
 if __name__ == "__main__":
-    get_followers()
+    # get_followers()
     calculate_growth()
     tweet()
