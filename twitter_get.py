@@ -91,7 +91,7 @@ def tweet():
     Gratulation! 🎊
     '''
     print (text, "\nZeichenanzahl:", len(text), flush=True)
-    # api.update_status(text)
+    api.update_status(text)
 
 if __name__ == "__main__":
     # get_followers()
